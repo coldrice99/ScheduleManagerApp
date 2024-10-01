@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일정 생성</title>
+</head>
+<body>
+<h1>게시글 입력</h1>
+<form action="/schedules" method="post">
+    <!-- 작성자 -->
+    <div>
+        <label for="author">작성자</label>
+        <input type="text" id="author" name="author" value="여홍철" readonly>
+    </div>
+
+    <!-- 비밀번호 -->
+    <div>
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+
+    <!-- 비밀번호 확인 -->
+    <div>
+        <label for="confirmPassword">비밀번호 확인</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required>
+    </div>
+
+    <!-- 제목 -->
+    <div>
+        <label for="title">제목</label>
+        <input type="text" id="title" name="title" placeholder="제목을 입력해주세요" required>
+    </div>
+
+    <!-- 내용 -->
+    <div>
+        <label for="content">내용</label>
+        <textarea id="content" name="content" rows="5" cols="30" required></textarea>
+    </div>
+
+    <!-- 버튼들 -->
+    <div>
+        <button type="submit">등록</button>
+        <button type="button" onclick="window.location.href='/schedules'">목록으로</button>
+        <button type="button" onclick="window.location.href='/'">처음으로</button>
+    </div>
+</form>
+</body>
+</html>

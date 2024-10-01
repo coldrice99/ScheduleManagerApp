@@ -14,7 +14,7 @@ import java.util.Map;
 @RequestMapping("/api")
 public class ScheduleController {
 
-    private final Map<Long, Schedule> scheduleList = new HashMap<>();
+    private final Map<Long, Schedule> scheduleList = new HashMap<>();  // long: id , Schedule : 객체
 
     // 일정 생성
     @PostMapping("/schedules")
@@ -42,5 +42,35 @@ public class ScheduleController {
 
         return responseList;
     }
+
+    // 일정 수정
+    @PutMapping("/schedules/{id}")
+    public Long updateSchedule(@PathVariable Long id, @RequestBody ScheduleRequestDto requestDto) {
+        //해당 메모리가 DB에 존재하는지 확인
+        if (scheduleList.containsKey(id)) {
+            // 해당 메모리 가져오기
+            Schedule schedule = scheduleList.get(id);
+
+            // 스케줄 수정
+            schedule.update(requestDto);
+            return schedule.getId();
+        } else {
+            throw new IllegalArgumentException("일정을 찾을 수 없습니다.");
+        }
+    }
+
+    // 일정 삭제
+    @DeleteMapping("/schedules/{id}")
+    public Long deleteSchedule(@PathVariable Long id) {
+        // 해당 메모리가 DB에 존재하는지 확인
+        if(scheduleList.containsKey(id)) {
+            // 해당 스케줄 삭제하기
+            scheduleList.remove(id);
+            return id;
+        } else {
+            throw new IllegalArgumentException("일정을 찾을 수 없습니다.");
+        }
+    }
+
 
 }
