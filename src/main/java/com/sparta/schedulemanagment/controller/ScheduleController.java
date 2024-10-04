@@ -120,6 +120,11 @@ public class ScheduleController {
         // 해당 스케줄이 DB에 존재하는지 확인
         Schedule schedule = findByID(id);
         if (schedule != null) {
+            // 패스워드가 null인지 체크
+            if(schedule.getPassword() == null || passwordMap.get("password") == null) {
+                throw new IllegalArgumentException("비밀번호가 설정되지 않았습니다.");
+            }
+
             // 패스워드 검증
             String inputPassword = passwordMap.get("password");
             if(!schedule.getPassword().equals(inputPassword)) {
@@ -148,6 +153,7 @@ public class ScheduleController {
                 // 결과가 있으면 Schedule 객체를 생성하고 resultSet에서 가져온 데이터를 객체에 세팅
                 Schedule schedule = new Schedule();
                 schedule.setUserName(resultSet.getString("userName"));
+                schedule.setPassword(resultSet.getString("password")); // 비밀번호 추가.
 
                 // String으로 가져온 updateDate를 LocalDateTime으로 변환
                 String updateDateString = resultSet.getString("updateDate");
