@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class TodoResponseDto {
     private Long id;
-    private String username;
+    private Long memberId;
     private String title;
     private String description;
     private String createdAt;

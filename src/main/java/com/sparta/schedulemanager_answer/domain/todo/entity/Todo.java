@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class Todo {
     @Setter
     private Long id;
-    private String username;
+    private Long memberId;
     private String title;
     private String password;
     private String description;
@@ -38,7 +38,7 @@ public class Todo {
 
     private void init(ResultSet rs) throws SQLException {
         this.id = rs.getLong("id");
-        this.username = rs.getString("username");
+        this.memberId = rs.getLong("member_id");
         this.title = rs.getString("title");
         this.password = rs.getString("password");
         this.description = rs.getString("description");
@@ -47,7 +47,7 @@ public class Todo {
     }
 
     public void init(TodoRequestDto todoRequestDto) {
-        this.username = todoRequestDto.getUsername();
+        this.memberId = todoRequestDto.getMemberId();
         this.title = todoRequestDto.getTitle();
         this.password = todoRequestDto.getPassword();
         this.description = todoRequestDto.getDescription();
@@ -58,7 +58,7 @@ public class Todo {
     public TodoResponseDto to() {
         return new TodoResponseDto(
                 this.id,
-                this.username,
+                this.memberId,
                 this.title,
                 this.description,
                 this.createdAt,
